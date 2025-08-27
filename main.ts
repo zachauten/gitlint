@@ -22,6 +22,10 @@ async function main() {
     boolean: ["help", "quiet"],
     string: ["level", "number"],
     default: { level: "info", number: "1" },
+    alias: {
+      number: ["n"],
+      level: ["l"]
+    }
   });
 
   if (flags.quiet) {
@@ -36,12 +40,23 @@ async function main() {
     const commits = await gitlog({
       repo: "./",
       number,
-      fields: ["subject", "body", "hash"],
+      fields: ["subject", "body", "hash", "rawBody"],
     });
     console.debug("%cDebug: found commits ", "color:blue", commits);
     for (const commit of commits) {
       console.debug("%cDebug: parsing commit " + commit.hash, "color:blue");
+
       parseSubject(commit.subject);
+
+      const [emtpy, body] = commit.rawBody.split(commits[0].subject);
+      if (emtpy !== "" || !body.startsWith("\n\n")) {
+        console.error("%cError: commit body does not start with an empty line", "color:red")
+        console.group()
+        console.error(`${commit.rawBody}`, "color:red")
+        console.groupEnd();
+      } else {
+        parseBody(commit.body);
+      }
     }
   } catch (error) {
     if (
@@ -84,7 +99,10 @@ export function parseSubject(subject: string): number {
       return parseScope(rest);
     }
   }
-  console.error(`%cError: subject missing type "${subject}"`, "color:red");
+  console.error(`%cError: subject missing valid type`, "color:red");
+  console.group();
+  console.error(subject);
+  console.groupEnd();
   return 1;
 }
 
@@ -122,7 +140,7 @@ function parseColonAndSpace(subject: string): number {
   }
 }
 
-function _parseBody() {
+function parseBody(body: string) {
 }
 
 function _parseFooters() {
