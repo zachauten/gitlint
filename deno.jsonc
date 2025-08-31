@@ -1,11 +1,11 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run --watch main.ts",
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
     "@std/cli": "jsr:@std/cli@^1.0.21",
     "@std/testing": "jsr:@std/testing@^1.0.15",
-    "gitlog": "npm:gitlog@^5.1.0"
-  }
+    "gitlog": "npm:gitlog@^5.1.0",
+  },
 }

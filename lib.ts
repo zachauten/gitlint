@@ -4,8 +4,7 @@
  * Forcing footer keys to end with ":", and values must not end with whitespace.
  */
 
-export const footerRegex =
-  /^(?<key>[\w-]+|BREAKING CHANGE|BREAKING-CHANGE):\s(?<value>.+)$/;
+export const footerRegex = /^(?<key>[\w-]+|BREAKING CHANGE|BREAKING-CHANGE):\s(?<value>.+)$/;
 
 export const headerRegex =
   /^(?<type>build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(?:\((?<scope>[\w-]+)\))?(?<breaking>!)?: (?<description>.+)/;

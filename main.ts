@@ -1,6 +1,6 @@
+import { parseArgs } from "@std/cli";
 import gitlog from "gitlog";
 import { parse } from "./lib.ts";
-import { parseArgs } from "@std/cli";
 
 async function main() {
   const args = parseArgs(Deno.args, {

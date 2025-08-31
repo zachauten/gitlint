@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "denoland.vscode-deno",
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.remote-containers",
+    "ms-azuretools.vscode-docker",
+    "hashicorp.hcl",
+    "VisualStudioExptTeam.vscodeintellicode"
+  ]
+}

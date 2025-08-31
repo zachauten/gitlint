@@ -1,5 +1,5 @@
-import { footerRegex, headerRegex, types } from "./lib.ts";
 import { assertEquals } from "@std/assert";
+import { footerRegex, headerRegex, types } from "./lib.ts";
 
 interface Component {
   str: string;
@@ -9,14 +9,14 @@ interface Component {
 type TestCase = PositiveCase | NegativeCase;
 
 interface PositiveCase {
-  str: string,
-  expected: true,
+  str: string;
+  expected: true;
 }
 
 interface NegativeCase {
-  str: string,
-  expected: false,
-  cause: string,
+  str: string;
+  expected: false;
+  cause: string;
 }
 
 interface FooterData {
@@ -53,8 +53,8 @@ Deno.test("footer", async (t) => {
       for (const separator of footerData.separators) {
         for (const value of footerData.values) {
           const footer = token.str + separator.str + value.str;
-          const expected = token.expected && separator.expected &&
-            value.expected;
+          const expected = token.expected && separator.expected
+            && value.expected;
 
           const actual = footerRegex.test(footer);
           await t.step(
@@ -107,10 +107,10 @@ Deno.test("header", async (t) => {
         for (const breaking of headerData.breakings) {
           for (const separator of headerData.separators) {
             for (const description of headerData.descriptions) {
-              const header = type.str + scope.str + breaking.str +
-                separator.str + description.str;
-              const expected = type.expected && scope.expected &&
-                breaking.expected && separator.expected && description.expected;
+              const header = type.str + scope.str + breaking.str
+                + separator.str + description.str;
+              const expected = type.expected && scope.expected
+                && breaking.expected && separator.expected && description.expected;
 
               const actual = headerRegex.test(header);
               await t.step(
